@@ -1,19 +1,17 @@
-var passport = require('passport');
-var localStrategy = require('passport-local').Strategy;
-var User = require('../models/user.model.js');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+const User = require('../models/user.model.js');
 
 // Store this user's unique id in the session for later reference
 // Only runs during authentication
 // Stores info on req.session.passport.user
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
+passport.serializeUser((user, done) => done(null, user.id));
 
 // Runs on every request after user is authenticated
 // Look up the user's id in the session and use it to find them in the DB for each request
 // result is stored on req.user
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
     if(err) {
       done(err);
     }
@@ -26,9 +24,9 @@ passport.deserializeUser(function(id, done) {
 passport.use('local', new localStrategy({
   passReqToCallback: true,
   usernameField: 'username'
-  }, function(req, username, password, done) {
+}, (req, username, password, done) => {
     // mongoose stuff
-    User.findOne({username: username}, function(err, user) {
+    User.findOne({username: username}, (err, user) => {
       if(err) {
         throw err;
       }
@@ -40,7 +38,7 @@ passport.use('local', new localStrategy({
       } else {
         // found user! Now check their given password against the one stored in the DB
         // comparePassword() is defined in the schema/model file!
-        user.comparePassword(password, function(err, isMatch) {
+        user.comparePassword(password, (err, isMatch) => {
           if(err) {
             throw err;
           }

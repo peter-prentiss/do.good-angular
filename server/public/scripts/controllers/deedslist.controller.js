@@ -1,10 +1,10 @@
 myApp.controller('DeedsListController', function(UserService, $http) {
   console.log('DeedsListController created');
-  var vm = this;
+  const vm = this;
   vm.userService = UserService;
   vm.userObject = UserService.userObject;
 
-  vm.completeDeed = function(deed) {
+  vm.completeDeed = (deed) => {
     console.log(deed);
     UserService.completeDeed(deed);
     getDeedsList();
@@ -15,18 +15,18 @@ myApp.controller('DeedsListController', function(UserService, $http) {
   function getDeedsList() {
     console.log('getting deeds');
     $http.get('/deedslist')
-      .then(function(response) {
+      .then(response => {
         console.log('here be thine good deeds for the day:', response.data);
         vm.deedslist = response.data;
       })
   }
 
-  vm.addDeed = function(description) {
+  vm.addDeed = description => {
     console.log('adding deed', description);
     if(description) {
       vm.deed = {description: description}
       $http.post('/deedslist', vm.deed)
-        .then(function(response) {
+        .then(response => {
           console.log('success', response);
         })
     }
