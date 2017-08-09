@@ -3,6 +3,7 @@ var router = express.Router();
 // var passport = require('passport');
 var Deed = require('../models/deed.model.js');
 var path = require('path');
+var User = require('../models/user.model.js')
 
 router.get('/', function(req, res) {
   console.log('getting the shelf items');
@@ -41,5 +42,31 @@ router.post('/', function(req, res) {
          }
     });
 });
+
+router.put('/complete', function(req, res) {
+  console.log('put route data', req.body.completedDeed);
+  User.findByIdAndUpdate(
+    req.user._id,
+    {$push: {completed: req.body.completedDeed}},
+    function(err, response) {
+      console.log('put outcome:', err, response);
+    }
+  )
+  res.sendStatus(200);
+})
+
+router.put('/save', function(req, res) {
+  console.log('put route data', req.body.savedDeed);
+  User.findByIdAndUpdate(
+    req.user._id,
+    {$push: {saved: req.body.savedDeed}},
+    function(err, response) {
+      console.log('put outcome:', err, response);
+    }
+  )
+  res.sendStatus(200);
+})
+
+
 
 module.exports = router;

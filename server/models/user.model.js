@@ -2,13 +2,18 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
+// var DeedSchema = require('../models/deed.model.js');
+
+var DeedSchema = new Schema({
+    description: String
+});
 
 // Mongoose Schema
 var UserSchema = new Schema({
     username: {type: String, required: true, index: {unique: true}},
     password: {type: String, required: true},
-    completed: Array,
-    saved: Array
+    completed: [DeedSchema],
+    saved: [DeedSchema]
 });
 
 // Called before adding a new user to the DB. Encrypts password.

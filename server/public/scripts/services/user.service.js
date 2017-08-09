@@ -9,6 +9,7 @@ myApp.factory('UserService', function($http, $location){
     getuser : function(){
       console.log('UserService -- getuser');
       $http.get('/user').then(function(response) {
+        console.log('user data', response);
           if(response.data.username) {
               // user has a curret session on the server
               userObject.userName = response.data.username;
@@ -32,10 +33,26 @@ myApp.factory('UserService', function($http, $location){
       });
     },
 
+    saveDeed: function(deed) {
+      console.log('saving deed', deed);
+      userObject.savedDeed = {
+        description: deed.description,
+        _id: deed._id
+      }
+      console.log('userObject:', userObject);
+      $http.put('/deedslist/save', userObject).then(function(response) {
+        console.log('completed deed');
+      })
+    },
+
     completeDeed: function(deed) {
       console.log('completing deed', deed);
-      userObject.completedDeed = deed
-      $http.put('/user', userObject).then(function(response) {
+      userObject.completedDeed = {
+        description: deed.description,
+        _id: deed._id
+      }
+      console.log('userObject:', userObject);
+      $http.put('/deedslist/complete', userObject).then(function(response) {
         console.log('completed deed');
       })
     }

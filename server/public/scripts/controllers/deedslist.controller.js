@@ -4,12 +4,6 @@ myApp.controller('DeedsListController', function(UserService, $http) {
   vm.userService = UserService;
   vm.userObject = UserService.userObject;
 
-  vm.completeDeed = (deed) => {
-    console.log(deed);
-    UserService.completeDeed(deed);
-    getDeedsList();
-  }
-
   getDeedsList();
 
   function getDeedsList() {
@@ -32,10 +26,16 @@ myApp.controller('DeedsListController', function(UserService, $http) {
     }
   }
 
-  // vm.saveDeed = function(deed) {
-  //   vm.savedDeed = {
-  //     description: description
-  //   }
-  //   $http.post('/')
-  // }
+  vm.saveDeed = function(deed) {
+    console.log(deed);
+    UserService.saveDeed(deed);
+    getDeedsList();
+  }
+
+  vm.completeDeed = (deed) => {
+    console.log(deed);
+    UserService.completeDeed(deed);
+    getDeedsList();
+  }
+
 });

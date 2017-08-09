@@ -1,10 +1,6 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="deedslist">
   <h2>Your Deeds:</h2>
-  <md-list flex>
-    <md-list-item ng-repeat="deed in dc.deedslist">{{deed.description}}</md-list-item>
-    <md-button class="md-raised md-primary" ng-click="dc.showAlert($event)">Save</md-button>
-  </md-list>
   <div class="deed" ng-repeat="deed in dc.deedslist">
     <p>
       {{deed.description}}
