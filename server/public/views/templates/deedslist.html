@@ -1,4 +1,13 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="deedslist">
   <h2>Your Deeds:</h2>
+  <div class="deed" ng-repeat="deed in dc.deedslist">
+    <p>
+      {{deed.description}}
+    </p>
+    <div>
+      <button type="button" name="button" ng-click="dc.saveDeed(deed)">Save</button>
+      <button type="button" name="button" ng-click="dc.completeDeed(deed)">Complete</button>
+    </div>
+  </div>
 </div>

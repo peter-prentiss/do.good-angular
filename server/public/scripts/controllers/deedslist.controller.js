@@ -1,8 +1,24 @@
 myApp.controller('DeedsListController', function(UserService, $http) {
   console.log('DeedsListController created');
   var vm = this;
-  vm.deed = {
-    description: ''
+  vm.userService = UserService;
+  vm.userObject = UserService.userObject;
+
+  vm.completeDeed = function(deed) {
+    console.log(deed);
+    UserService.completeDeed(deed);
+    getDeedsList();
+  }
+
+  getDeedsList();
+
+  function getDeedsList() {
+    console.log('getting deeds');
+    $http.get('/deedslist')
+      .then(function(response) {
+        console.log('here be thine good deeds for the day:', response.data);
+        vm.deedslist = response.data;
+      })
   }
 
   vm.addDeed = function(description) {
@@ -15,4 +31,11 @@ myApp.controller('DeedsListController', function(UserService, $http) {
         })
     }
   }
+
+  // vm.saveDeed = function(deed) {
+  //   vm.savedDeed = {
+  //     description: description
+  //   }
+  //   $http.post('/')
+  // }
 });

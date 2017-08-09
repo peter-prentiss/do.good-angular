@@ -30,6 +30,14 @@ myApp.factory('UserService', function($http, $location){
         console.log('UserService -- logout -- logged out');
         $location.path("/home");
       });
+    },
+
+    completeDeed: function(deed) {
+      console.log('completing deed', deed);
+      userObject.completedDeed = deed
+      $http.put('/user', userObject).then(function(response) {
+        console.log('completed deed');
+      })
     }
   };
 });

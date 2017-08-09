@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
     } else {
       res.send(data); //array of objects - each obj a document in the collectin in the db
       //res.send(result.rows) - same as
-      console.log('all shelf items from db: ', data);
+      console.log('all deeds from db: ', data);
     }//end if
   });//end find
 });
