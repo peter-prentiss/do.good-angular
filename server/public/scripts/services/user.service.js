@@ -13,6 +13,8 @@ myApp.factory('UserService', function($http, $location){
           if(response.data.username) {
               // user has a curret session on the server
               userObject.userName = response.data.username;
+              userObject.completed = response.data.completed;
+              userObject.saved = response.data.saved;
               console.log('UserService -- getuser -- User Data: ', userObject.userName);
           } else {
               console.log('UserService -- getuser -- failure');
@@ -54,6 +56,18 @@ myApp.factory('UserService', function($http, $location){
       console.log('userObject:', userObject);
       $http.put('/deedslist/complete', userObject).then(function(response) {
         console.log('completed deed');
+      })
+    },
+
+    shareDeed: function(deed) {
+      console.log('sharing deed:', deed);
+      userObject.sharedDeed = {
+        description: deed.description,
+        _id: deed._id
+      }
+      console.log('userObject:', userObject);
+      $http.post('/deedslist/share', userObject).then(function(response) {
+        console.log('shared deed')
       })
     }
   };

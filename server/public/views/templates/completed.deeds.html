@@ -1,4 +1,15 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="completed-deeds">
-  <h2>Your Completed Deeds:</h2>
+  <md-content>
+    <md-list flex>
+      <md-subheader class="md-no-sticky">Your Completed Deeds:</md-header>
+      <md-list-item class="md-1-line" ng-repeat="deed in dc.completedDeeds">
+        <div class="md-list-item-text" layout="column">
+          <h4>{{ deed.description }}</h4>
+        </div>
+        <i class="material-icons share" ng-click="dc.shareDeed(deed)">share</i>
+        <md-divider ></md-divider>
+      </md-list-item>
+    </md-list>
+  </md-content>
 </div>

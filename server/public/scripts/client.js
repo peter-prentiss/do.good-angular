@@ -46,7 +46,7 @@ myApp.config(function($routeProvider, $locationProvider) {
     })
     .when('/complete', {
       templateUrl: '/views/templates/completed.deeds.html',
-      controller: 'UserController as uc',
+      controller: 'DeedsListController as dc',
       resolve: {
         getuser : function(UserService){
           return UserService.getuser();

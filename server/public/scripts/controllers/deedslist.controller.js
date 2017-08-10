@@ -6,12 +6,23 @@ myApp.controller('DeedsListController', function(UserService, $http) {
 
   getDeedsList();
 
+  vm.completedDeeds = vm.userObject.completed;
+
   function getDeedsList() {
     console.log('getting deeds');
     $http.get('/deedslist')
       .then(response => {
         console.log('here be thine good deeds for the day:', response.data);
-        vm.deedslist = response.data;
+        let deedlist = response.data;
+        // let filtered = response.data.filter(function(e){return this.indexOf(e)<0;}, vm.completedDeeds)
+        // vm.deedslist = response.data.filter(function(e){return this.indexOf(e)<0;}, vm.completedDeeds)
+        vm.deedslist = deedlist.filter(function(e){
+          return vm.completedDeeds.filter(function(f) {
+            return f._id == e._id;
+          }).length == 0
+        })
+        console.log('completed deeds', vm.completedDeeds);
+        console.log(vm.deedslist);
       })
   }
 
@@ -38,4 +49,8 @@ myApp.controller('DeedsListController', function(UserService, $http) {
     getDeedsList();
   }
 
+  vm.shareDeed = (deed) => {
+    console.log(deed);
+    UserService.shareDeed(deed);
+  }
 });

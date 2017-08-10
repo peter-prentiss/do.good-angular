@@ -11,7 +11,7 @@ body, html {
 }
 
 .header {
-  background-color: #333333;
+  background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 46%,rgba(55,0,58,1) 100%);
   color: #DDDDDD;
   padding: 15px;
 }
@@ -117,4 +117,26 @@ li a:hover {
 
 .deedslist {
   margin-bottom: 100px;
+}
+
+.list-heading {
+  display: inline;
+}
+
+i {
+  float: left;
+}
+
+.save {
+  color: rgb(244, 255, 41);
+  text-shadow: 1px 1px 1px black;
+}
+
+.complete {
+  color: rgb(59, 231, 0);
+  text-shadow: 1px 1px 1px black;
+}
+
+.share {
+  color: rgb(52, 40, 60);
 }

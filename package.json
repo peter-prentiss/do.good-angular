@@ -29,6 +29,7 @@
     "grunt-contrib-uglify": "^3.0.1",
     "grunt-contrib-watch": "^1.0.0",
     "jquery": "^2.1.4",
+    "material-design-icons": "^3.0.1",
     "mongoose": "^4.4.6",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",

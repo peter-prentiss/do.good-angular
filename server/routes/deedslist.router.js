@@ -4,6 +4,7 @@ var router = express.Router();
 var Deed = require('../models/deed.model.js');
 var path = require('path');
 var User = require('../models/user.model.js')
+const Share = require('../models/shared.model.js')
 
 router.get('/', function(req, res) {
   console.log('getting the shelf items');
@@ -45,6 +46,7 @@ router.post('/', function(req, res) {
 
 router.put('/complete', function(req, res) {
   console.log('put route data', req.body.completedDeed);
+  addPopularity(req.body.completedDeed._id)
   User.findByIdAndUpdate(
     req.user._id,
     {$push: {completed: req.body.completedDeed}},
@@ -59,14 +61,41 @@ router.put('/save', function(req, res) {
   console.log('put route data', req.body.savedDeed);
   User.findByIdAndUpdate(
     req.user._id,
-    {$push: {saved: req.body.savedDeed}},
-    function(err, response) {
-      console.log('put outcome:', err, response);
-    }
+    {$push: {saved: req.body.savedDeed}}
   )
   res.sendStatus(200);
 })
 
+function addPopularity(deedId) {
+  console.log('adding popularity to deed id:', deedId);
+  Deed.findOneAndUpdate({ _id: deedId }, { $inc: { popularity: 1 }},
+    function(err, response) {
+      console.log('popularity attempt:', err, response);
+    }
+  )
+  // Deed.findByIdAndUpdate(
+  //   deedId,
+  //   { $inc: {popularity: 1}}
+  // )
+}
 
+router.post('/share', function(req, res) {
+  console.log('sharing deed:', req.body);
+  var deedToShare = {
+    description : req.body.sharedDeed.description,
+    username: req.body.username
+  };
+
+
+  Share.create(deedToShare, function(err, post) {
+     if(err) {
+       // next() here would continue on and route to routes/index.js
+       next(err);
+     } else {
+      // route a new express request for GET '/'
+      res.sendStatus(201);
+     }
+  });
+})
 
 module.exports = router;

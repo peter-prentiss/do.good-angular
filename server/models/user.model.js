@@ -1,15 +1,19 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var bcrypt = require('bcrypt');
-var SALT_WORK_FACTOR = 10;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
+const SALT_WORK_FACTOR = 10;
 // var DeedSchema = require('../models/deed.model.js');
 
-var DeedSchema = new Schema({
-    description: String
+
+const DeedSchema = new Schema({
+    description: String,
+    likes: {type: Number, default: 0},
+    userComment: String,
+    shared: {type: Boolean, default: false}
 });
 
 // Mongoose Schema
-var UserSchema = new Schema({
+const UserSchema = new Schema({
     username: {type: String, required: true, index: {unique: true}},
     password: {type: String, required: true},
     completed: [DeedSchema],
@@ -18,7 +22,7 @@ var UserSchema = new Schema({
 
 // Called before adding a new user to the DB. Encrypts password.
 UserSchema.pre('save', function(next) {
-    var user = this;
+    let user = this;
 
     if(!user.isModified('password')) {
       return next();
