@@ -53,7 +53,11 @@ myApp.factory('UserService', function($http, $location){
         description: deed.description,
         _id: deed._id
       }
+      // put in if
       console.log('userObject:', userObject);
+      $http.put('deedslist/removesave', userObject).then(function(response) {
+        console.log('removed from save');
+      })
       $http.put('/deedslist/complete', userObject).then(function(response) {
         console.log('completed deed');
       })
@@ -67,7 +71,7 @@ myApp.factory('UserService', function($http, $location){
       }
       console.log('userObject:', userObject);
       $http.put('/deedslist/markshared', userObject).then(function(response) {
-        
+
       })
       $http.post('/deedslist/share', userObject).then(function(response) {
         console.log('shared deed')

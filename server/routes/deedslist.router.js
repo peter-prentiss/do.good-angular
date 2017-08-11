@@ -4,6 +4,7 @@ var passport = require('passport');
 var Deed = require('../models/deed.model.js');
 var path = require('path');
 var User = require('../models/user.model.js')
+var mongoose = require('mongoose');
 const Share = require('../models/shared.model.js')
 
 router.get('/', function(req, res) {
@@ -95,6 +96,18 @@ router.put('/markshared', function(req, res) {
     {$set: {"completed.$.shared": true}},
     function(err, response) {
       console.log('attempt to mark shared:', err, response);
+    }
+  )
+  res.sendStatus(200);
+})
+
+router.put('/removesave', function(req, res) {
+  console.log('put route remove saved:', req.body.completedDeed);
+  User.findByIdAndUpdate(
+    req.user._id,
+    { $pull: {"saved": {_id: mongoose.Types.ObjectId(req.body.completedDeed._id)}}},
+    function(err, response) {
+      console.log('attempt to remove saved:', err, response);
     }
   )
   res.sendStatus(200);

@@ -7,6 +7,7 @@ myApp.controller('DeedsListController', function(UserService, $http) {
   getDeedsList();
 
   vm.completedDeeds = vm.userObject.completed;
+  vm.savedDeeds = vm.userObject.saved;
 
   function getDeedsList() {
     console.log('getting deeds');
@@ -14,10 +15,13 @@ myApp.controller('DeedsListController', function(UserService, $http) {
       .then(response => {
         console.log('here be thine good deeds for the day:', response.data);
         let deedlist = response.data;
-        // let filtered = response.data.filter(function(e){return this.indexOf(e)<0;}, vm.completedDeeds)
-        // vm.deedslist = response.data.filter(function(e){return this.indexOf(e)<0;}, vm.completedDeeds)
         vm.deedslist = deedlist.filter(function(e){
           return vm.completedDeeds.filter(function(f) {
+            return f._id == e._id;
+          }).length == 0
+        })
+        vm.deedslist = deedlist.filter(function(e){
+          return vm.savedDeeds.filter(function(f) {
             return f._id == e._id;
           }).length == 0
         })
