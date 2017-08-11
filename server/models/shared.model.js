@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
   comment: String,
@@ -7,11 +7,12 @@ const CommentSchema = new Schema({
 })
 
 // Mongoose Schema
-var SharedSchema = new Schema({
+const SharedSchema = new Schema({
     description: {type: String},
     username: {type: String},
     userId: String,
-    comments: [CommentSchema]
+    comments: [CommentSchema],
+    likes: {type: Number, default: 0}
 });
 
 module.exports = mongoose.model('Share', SharedSchema);

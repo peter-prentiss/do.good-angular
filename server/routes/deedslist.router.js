@@ -1,14 +1,13 @@
 var express = require('express');
 var router = express.Router();
-// var passport = require('passport');
+var passport = require('passport');
 var Deed = require('../models/deed.model.js');
 var path = require('path');
 var User = require('../models/user.model.js')
 const Share = require('../models/shared.model.js')
 
 router.get('/', function(req, res) {
-  console.log('getting the shelf items');
-  //res.sendFile(path.resolve(__dirname, '../public/views/templates/shelf.html'));
+  console.log('getting the deeds');
 
   Deed.find({}, function(err, data) { //find * (same as in mongoose)
     if(err) {
@@ -23,11 +22,6 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-  /*
-  username: {type: String, required: true, index: {unique: true}},
-  password: {type: String, required: true},
-  recipes: {type: Array}
-  */
     var deedToSave = {
       description : req.body.description
     };
@@ -73,17 +67,13 @@ function addPopularity(deedId) {
       console.log('popularity attempt:', err, response);
     }
   )
-  // Deed.findByIdAndUpdate(
-  //   deedId,
-  //   { $inc: {popularity: 1}}
-  // )
 }
 
 router.post('/share', function(req, res) {
   console.log('sharing deed:', req.body);
   var deedToShare = {
     description : req.body.sharedDeed.description,
-    username: req.body.username
+    username: req.body.userName
   };
 
 
@@ -96,6 +86,34 @@ router.post('/share', function(req, res) {
       res.sendStatus(201);
      }
   });
+})
+
+router.put('/markshared', function(req, res) {
+  console.log('put route data markshared', req.body.sharedDeed);
+  User.findOneAndUpdate(
+    { "_id": req.user._id, "completed._id": req.body.sharedDeed._id },
+    {$set: {"completed.$.shared": true}},
+    function(err, response) {
+      console.log('attempt to mark shared:', err, response);
+    }
+  )
+  res.sendStatus(200);
+})
+
+router.get('/share', function(req, res) {
+  console.log('getting the shared deeds');
+
+  Share.find({}, function(err, data) { //find * (same as in mongoose)
+    if(err) {
+      console.log('find error: ', err);
+      res.sendStatus(500);
+    } else {
+      res.send(data); //array of objects - each obj a document in the collectin in the db
+      //res.send(result.rows) - same as
+      console.log('all deeds from db: ', data);
+    }//end if
+  });//end find
+
 })
 
 module.exports = router;

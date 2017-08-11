@@ -66,6 +66,9 @@ myApp.factory('UserService', function($http, $location){
         _id: deed._id
       }
       console.log('userObject:', userObject);
+      $http.put('/deedslist/markshared', userObject).then(function(response) {
+        
+      })
       $http.post('/deedslist/share', userObject).then(function(response) {
         console.log('shared deed')
       })

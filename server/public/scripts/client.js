@@ -62,6 +62,15 @@ myApp.config(function($routeProvider, $locationProvider) {
         }
       }
     })
+    .when('/shared', {
+      templateUrl: '/views/templates/shared.deeds.html',
+      controller: 'SharedListController as sc',
+      resolve: {
+        getuser : function(UserService){
+          return UserService.getuser();
+        }
+      }
+    })
     .otherwise({
       redirectTo: 'login'
     });
