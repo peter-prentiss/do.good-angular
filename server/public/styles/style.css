@@ -5,6 +5,10 @@ body, html {
   font-size: 16px;
 }
 
+main {
+  height: 100%;
+}
+
 .instructions .container h1 {
   font-size: 32px;
   font-weight: 600;
@@ -52,6 +56,7 @@ body, html {
   position: fixed;
   bottom: 0;
   background-color: #333333;
+  height: 50px;
   width: 100%;
   border-radius: 0px;
 }
@@ -95,24 +100,24 @@ li a:hover {
   font-size: 3em;
 }
 
-.material-icons.add-deed {
+.add-deed {
   color: rgb(50, 201, 174)
 }
 
-.material-icons.shared {
+.shared {
   color: rgb(76, 88, 241)
 }
 
-.material-icons.complete {
+.complete {
   color: rgb(60, 255, 161)
 }
 
-.material-icons.deedlist {
+.deedlist {
   color: rgb(255, 105, 217)
 }
 
-.material-icons.userinfo {
-  color: rgb(134, 46, 223)
+.md-button.userinfo {
+  background-color: rgb(134, 46, 223)
 }
 
 .deedslist {
@@ -139,4 +144,28 @@ i {
 
 .share {
   color: rgb(52, 40, 60);
+}
+
+svg {
+  color: rgb(255, 255, 255);
+}
+
+.welcome {
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 46%,rgba(55,0,58,1) 100%);
+
+}
+
+#or {
+  color: white;
+}
+
+.login {
+  margin-left: 50px;
+}
+
+.user-photo {
+  margin-top: 25px;
+  width: 200px;
+  color: #666;
 }

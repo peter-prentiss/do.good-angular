@@ -7,7 +7,7 @@ myApp.config(function($routeProvider, $locationProvider) {
   $routeProvider
     .when('/welcome', {
       templateUrl: '/views/templates/welcome.html',
-      controller: 'LoginController as lc',
+      controller: 'WelcomeController as wc',
     })
     .when('/login', {
       templateUrl: '/views/templates/login.html',
@@ -72,6 +72,6 @@ myApp.config(function($routeProvider, $locationProvider) {
       }
     })
     .otherwise({
-      redirectTo: 'login'
+      redirectTo: 'welcome'
     });
 });

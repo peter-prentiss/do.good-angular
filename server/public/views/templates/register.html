@@ -1,17 +1,22 @@
-<div class="container">
-  <h1 class="lead">Register User</h1>
-  <h1 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
+<div ng-include="'views/partials/header.html'"></div>
+<div class="login">
+  <h1 class="lead">Sign Up</h1>
+  <h4 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h4>
   <form ng-submit="lc.registerUser()">
     <div>
+      <md-input-container>
         <label for="username">Username:</label>
-        <input type="text" ng-model="lc.user.username" />
+        <input type="text" ng-model="lc.user.username" autofocus/>
+      </md-input-container>
     </div>
     <div>
+      <md-input-container>
         <label for="password">Password:</label>
         <input type="password" ng-model="lc.user.password" />
+      </md-input-container>
     </div>
-    <input class="btn btn-default" type="submit" name="submit" value="Register" />
-    <a href="#home">Cancel</a>
+    <md-button type="submit" class="md-raised md-primary">Register</md-button>
+    <a href="#welcome">Cancel</a>
   </form>
 
 </div>

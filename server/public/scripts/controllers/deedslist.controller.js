@@ -4,10 +4,22 @@ myApp.controller('DeedsListController', function(UserService, $http) {
   vm.userService = UserService;
   vm.userObject = UserService.userObject;
 
-  getDeedsList();
-
+  getDeeds();
+  // getDeedsList();
   vm.completedDeeds = vm.userObject.completed;
-  vm.savedDeeds = vm.userObject.saved;
+  // vm.savedDeeds = vm.userObject.saved;
+  vm.savedDeeds;
+
+  function getDeeds() {
+    console.log('getting saved deeds');
+    $http.get('/deedslist/saved')
+      .then(response => {
+        vm.savedDeeds = response.data.saved;
+        vm.completedDeeds = response.data.completed;
+        console.log('saved deeds:', vm.savedDeeds, vm.completedDeeds);
+        // getDeedsList();
+    }).then(() => getDeedsList())
+  }
 
   function getDeedsList() {
     console.log('getting deeds');

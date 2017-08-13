@@ -1,6 +1,7 @@
-<div class="container">
+<div ng-include="'views/partials/header.html'"></div>
+<div class="login">
   <h1 class="lead">Login</h1>
-    <h1 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
+    <h4 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h4>
     <form ng-submit="lc.login()">
       <div>
         <md-input-container>
@@ -18,8 +19,7 @@
       <div>
         <md-content>
           <!-- <input class="btn btn-default" type="submit" name="submit" value="Log In" /> -->
-          <md-button class="md-raised md-primary" ng-click="lc.login()">Log In</md-button>
-          <md-button class="md-raised md-primary">Register</md-button>
+          <md-button type="submit" class="md-raised md-primary">Log In</md-button>
           <a href="#register">Register</a>
         </md-content>
       </div>

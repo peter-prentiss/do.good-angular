@@ -22,6 +22,21 @@ router.get('/', function(req, res) {
   });//end find
 });
 
+router.get('/saved', function(req, res) {
+  console.log('getting saved deeds');
+  let userId = req.user._id
+  console.log('user id:', req.user._id)
+  User.findById(req.user._id, (err, user) => {
+    console.log('user saved deeds', user.saved);
+    if(err) {
+      throw err;
+    } else {
+      console.log('user saved deeds', user.saved);
+      res.send({saved: user.saved, completed: user.completed})
+    }
+  })
+})
+
 router.post('/', function(req, res) {
     var deedToSave = {
       description : req.body.description
@@ -56,7 +71,10 @@ router.put('/save', function(req, res) {
   console.log('put route data', req.body.savedDeed);
   User.findByIdAndUpdate(
     req.user._id,
-    {$push: {saved: req.body.savedDeed}}
+    {$push: {saved: req.body.savedDeed}},
+    function(err, response) {
+      console.log('adding to saved attempt:', err, response);
+    }
   )
   res.sendStatus(200);
 })
