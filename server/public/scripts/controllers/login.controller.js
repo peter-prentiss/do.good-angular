@@ -10,7 +10,7 @@ myApp.controller('LoginController', function($http, $location, UserService) {
     vm.login = function() {
       console.log('LoginController -- login');
       if(vm.user.username === '' || vm.user.password === '') {
-        vm.message = "Enter your username and password!";
+        vm.message = "Please enter your username and password.";
       } else {
         console.log('LoginController -- login -- sending to server...', vm.user);
         $http.post('/', vm.user).then(function(response) {
@@ -32,12 +32,16 @@ myApp.controller('LoginController', function($http, $location, UserService) {
     vm.registerUser = function() {
       console.log('LoginController -- registerUser');
       if(vm.user.username === '' || vm.user.password === '') {
-        vm.message = "Choose a username and password!";
-      } else {
+        vm.message = "Please choose a username and password.";
+      }
+      if(vm.user.password !== vm.user.confirmpwd) {
+        vm.message = "Passwords must match."
+      }
+      else {
         console.log('LoginController -- registerUser -- sending to server...', vm.user);
         $http.post('/register', vm.user).then(function(response) {
           console.log('LoginController -- registerUser -- success');
-          $location.path('/home');
+          $location.path('/login');
         }).catch(function(response) {
           console.log('LoginController -- registerUser -- error');
           vm.message = "Please try again."

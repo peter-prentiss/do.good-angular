@@ -46,7 +46,7 @@ router.post('/', function(req, res) {
     Deed.create(deedToSave, function(err, post) {
          if(err) {
            // next() here would continue on and route to routes/index.js
-           next(err);
+           throw err;
          } else {
           // route a new express request for GET '/'
           res.sendStatus(201);

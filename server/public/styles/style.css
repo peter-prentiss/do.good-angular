@@ -53,10 +53,11 @@ main {
 }
 
 .navbar {
+  z-index: 100;
   position: fixed;
   bottom: 0;
   background-color: #333333;
-  height: 50px;
+  height: 70px;
   width: 100%;
   border-radius: 0px;
 }
@@ -100,20 +101,20 @@ li a:hover {
   font-size: 3em;
 }
 
-.add-deed {
-  color: rgb(50, 201, 174)
+.md-button.add-deed {
+  background-color: rgb(50, 201, 174)
 }
 
-.shared {
-  color: rgb(76, 88, 241)
+.md-button.shared {
+  background-color: rgb(76, 88, 241)
 }
 
-.complete {
-  color: rgb(60, 255, 161)
+.md-button.complete {
+  background-color: rgb(60, 255, 161)
 }
 
-.deedlist {
-  color: rgb(255, 105, 217)
+.md-button.deedlist {
+  background-color: rgb(255, 105, 217)
 }
 
 .md-button.userinfo {
@@ -132,8 +133,8 @@ i {
   float: left;
 }
 
-.save {
-  color: rgb(244, 255, 41);
+.md-button.save {
+  background-color: rgb(199, 166, 51);
   text-shadow: 1px 1px 1px black;
 }
 
@@ -168,4 +169,28 @@ svg {
   margin-top: 25px;
   width: 200px;
   color: #666;
+}
+
+.completed-deeds {
+  z-index: -1;
+}
+
+.shared-deeds {
+  z-index: -1;
+}
+
+.new-deed {
+  margin-left: 50px;
+}
+
+.md-button.share {
+  background-color: #555;
+}
+
+.user-info {
+  margin-bottom: 100px;
+}
+
+.personal-info {
+  margin-left: 30px;
 }

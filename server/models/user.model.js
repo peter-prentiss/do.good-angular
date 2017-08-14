@@ -17,7 +17,10 @@ const UserSchema = new Schema({
     username: {type: String, required: true, index: {unique: true}},
     password: {type: String, required: true},
     completed: [DeedSchema],
-    saved: [DeedSchema]
+    saved: [DeedSchema],
+    partner: String,
+    children: Array,
+    friends: Array
 });
 
 // Called before adding a new user to the DB. Encrypts password.

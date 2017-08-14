@@ -1,4 +1,4 @@
-<div class="navbar">
+<div layout="row" layout-align="space-around center" class="navbar" ng-controller="NavController as nc">
   <!-- <md-content class="md-padding">
     <md-nav-bar md-selected-nav-item="currentNavItem">
       <md-nav-item md-nav-href="#/user" name="user">
@@ -37,21 +37,19 @@
       <li layout-align="center center"><a href="#/shared"><i class="material-icons shared">public</i></a></li>
     </ul>
   </div> -->
-  <div layout="row" layout-align="space-around center">
-    <md-button class="md-fab md-mini userinfo">
+    <md-button class="md-fab md-mini userinfo" aria-label="User info" ng-click="nc.navigate('user')">
         <md-icon md-svg-src="images/icons/person.svg"></md-icon>
     </md-button>
-    <md-button class="md-fab md-mini">
+    <md-button class="md-fab md-mini deedlist" aria-label="Deeds List" ng-click="nc.navigate('deedslist')">
         <md-icon md-svg-src="images/icons/list.svg"></md-icon>
     </md-button>
-    <md-button class="md-fab md-mini">
-        <md-icon md-svg-src="images/icons/add.svg"></md-icon>
+    <md-button class="md-fab md-mini add-deed">
+        <md-icon md-svg-src="images/icons/add.svg" aria-label="Add a deed" ng-click="nc.navigate('newdeed')"></md-icon>
     </md-button>
-    <md-button class="md-fab md-mini">
-        <md-icon md-svg-src="images/icons/playlist_add_check.svg"></md-icon>
+    <md-button class="md-fab md-mini complete">
+        <md-icon md-svg-src="images/icons/playlist_add_check.svg" aria-label="completed deeds" ng-click="nc.navigate('complete')"></md-icon>
     </md-button>
-    <md-button class="md-fab md-mini">
-        <md-icon md-svg-src="images/icons/public.svg"></md-icon>
+    <md-button class="md-fab md-mini shared">
+        <md-icon md-svg-src="images/icons/public.svg" aria-label="shared deeds" ng-click="nc.navigate('shared')"></md-icon>
     </md-button>
-  </div>
 </div>

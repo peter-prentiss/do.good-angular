@@ -1,7 +1,7 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'xeditable']);
 
 /// Routes ///
-myApp.config(function($routeProvider, $locationProvider) {
+myApp.config(function($routeProvider, $locationProvider, $mdThemingProvider) {
   $locationProvider.hashPrefix('');
   console.log('myApp -- config')
   $routeProvider
@@ -74,4 +74,12 @@ myApp.config(function($routeProvider, $locationProvider) {
     .otherwise({
       redirectTo: 'welcome'
     });
+
+    $mdThemingProvider.theme('default')
+      .primaryPalette('deep-purple')
+      .warnPalette('red')
 });
+
+myApp.run(function(editableOptions) {
+  editableOptions.theme = 'bs3'
+})
