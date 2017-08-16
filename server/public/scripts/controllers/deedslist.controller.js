@@ -35,7 +35,7 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
   vm.showDeed = function(ev, deed, index) {
     vm.deed = deed;
     vm.index = index;
-    console.log('editing:', vm.deed, 'at index', vm.index);
+    // console.log('editing:', vm.deed, 'at index', vm.index);
     $mdDialog.show({
       controller: DialogController,
       templateUrl: 'views/partials/inddeed.html',
@@ -44,17 +44,20 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
       clickOutsideToClose:true,
       fullscreen: vm.customFullscreen // Only for -xs, -sm breakpoints.
     })
-    .then(function(answer) {
-      vm.status = 'You said the information was "' + answer + '".';
+    .then(function(deed) {
+      // console.log('passing deed?', deed);
+      $http.put('/deedslist/edit', deed).then(response => {
+        console.log('edit attempt:', response);
+      })
     }, function() {
       vm.status = 'You cancelled the dialog.';
     });
   };
 
-  function DialogController($scope, $mdDialog) {
+  function DialogController($scope, $mdDialog, $http) {
     $scope.deed = vm.deed;
     $scope.index = vm.index;
-    console.log('able to access variables?', $scope.deed, $scope.index);
+    // console.log('able to access variables?', $scope.deed, $scope.index);
     $scope.hide = function() {
       $mdDialog.hide();
     };
@@ -64,7 +67,8 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
     };
 
     $scope.answer = function(answer) {
-      $mdDialog.hide(answer);
+      console.log('edited deed', $scope.deed);
+      $mdDialog.hide($scope.deed);
     };
   }
 
@@ -79,9 +83,6 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
     }).then(() => getDeedsList())
   }
 
-  let unfiltered = 'Tell your partner you love them';
-  let filtered = unfiltered.replace(/your partner/, vm.userObject.partner);
-  console.log('Filtered partner:', filtered);
   // function getCompleteDeeds() {
   //   console.log('getting complete deeds');
   //   $http.get('/deedslist/complete')
@@ -129,10 +130,14 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
       })
   }
 
-  vm.addDeed = description => {
-    console.log('adding deed', description);
+  vm.addDeed = (description, note) => {
+    console.log('adding deed', description, note);
     if(description) {
-      vm.deed = {description: description}
+      vm.deed = {
+        description: description,
+        note: note
+      }
+      vm.saveDeed(vm.deed);
       $http.post('/deedslist', vm.deed)
         .then(response => {
           console.log('success', response);

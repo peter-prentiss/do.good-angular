@@ -9,7 +9,8 @@ const DeedSchema = new Schema({
     description: String,
     likes: {type: Number, default: 0},
     userComment: String,
-    shared: {type: Boolean, default: false}
+    shared: {type: Boolean, default: false},
+    note: String
 });
 
 // Mongoose Schema

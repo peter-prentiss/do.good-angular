@@ -38,8 +38,10 @@ router.get('/saved', function(req, res) {
 })
 
 router.post('/', function(req, res) {
+  console.log('adding new deed:', req.body);
     var deedToSave = {
-      description : req.body.description
+      description : req.body.description,
+      note: req.body.note
     };
 
 
@@ -65,6 +67,22 @@ router.put('/complete', function(req, res) {
     }
   )
   res.sendStatus(200);
+})
+
+router.put('/edit', function(req, res) {
+  console.log('edit deed data', req.body);
+  User.findOneAndUpdate(
+    { "_id": req.user._id, "saved._id": req.body._id },
+    {$set: {
+        "saved.$.description": req.body.description,
+        "saved.$.note": req.body.note
+      }
+    },
+    function(err, response) {
+      console.log('attempt to edit deed:', err, response);
+    }
+  )
+  res.sendStatus(200)
 })
 
 router.put('/save', function(req, res) {

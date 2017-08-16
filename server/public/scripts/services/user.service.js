@@ -42,7 +42,8 @@ myApp.factory('UserService', function($http, $location){
       console.log('saving deed', deed);
       userObject.savedDeed = {
         description: deed.description,
-        _id: deed._id
+        note: deed.note
+        // _id: deed._id
       }
       console.log('userObject:', userObject);
       $http.put('/deedslist/save', userObject).then(function(response) {

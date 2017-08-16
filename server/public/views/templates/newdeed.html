@@ -2,18 +2,24 @@
 
 <div class="new-deed">
   <h2>New Deed:</h2>
-  <form ng-submit="dc.addDeed(dc.description)">
+  <form ng-submit="dc.addDeed(dc.description, dc.note)">
     <div>
       <md-input-container>
         <label for="description">Description:</label>
         <input id="description" type="text" ng-model="dc.description" autofocus/>
       </md-input-container>
+      <p>Use for sharing ideas with others so they will be personalized:</p>
+      <md-button ng-click="dc.inputConcat('your partner')" class="md-raised">+ your partner</md-button>
+      <md-button ng-click="dc.inputConcat('your child')" class="md-raised">+ your child</md-button>
+      <md-button ng-click="dc.inputConcat('your friend')" class="md-raised">+ your friend</md-button>
+
+      <md-input-container class="md-block">
+        <label>Note (for your eyes only):</label>
+        <textarea ng-model="dc.note" md-maxlength="140" rows="1" md-select-on-focus></textarea>
+      </md-input-container>
     </div>
     <!-- <input class="btn btn-default" type="submit" name="submit" value="Submit New Deed" /> -->
-    <md-button ng-click="dc.inputConcat('your partner')" class="md-raised">+ your partner</md-button>
-    <md-button ng-click="dc.inputConcat('your child')" class="md-raised">+ your child</md-button>
-    <md-button ng-click="dc.inputConcat('your friend')" class="md-raised">+ your friend</md-button>
-    <md-button ng-click="dc.addDeed(dc.description)" class="md-raised md-primary">Add New Deed</md-button>
+    <md-button ng-click="dc.addDeed(dc.description, dc.note)" class="md-raised md-primary">Add New Deed</md-button>
   </form>
 </div>
 <div ng-include="'views/partials/nav.html'"></div>
