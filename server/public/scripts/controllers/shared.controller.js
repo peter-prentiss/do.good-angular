@@ -12,4 +12,13 @@ myApp.controller('SharedListController', function(UserService, $http) {
       vm.sharedList = response.data;
     })
   }
+
+  vm.likeShared = function(deed) {
+    console.log('liking deed:', deed);
+    $http.put('/deedslist/like', deed).then(function(response) {
+      console.log('like response', response);
+      getShared();
+    })
+  }
+
 });

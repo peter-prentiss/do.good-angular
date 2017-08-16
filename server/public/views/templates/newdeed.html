@@ -1,3 +1,5 @@
+<div ng-include="'views/partials/header.html'"></div>
+
 <div class="new-deed">
   <h2>New Deed:</h2>
   <form ng-submit="dc.addDeed(dc.description)">
@@ -8,7 +10,10 @@
       </md-input-container>
     </div>
     <!-- <input class="btn btn-default" type="submit" name="submit" value="Submit New Deed" /> -->
-    <md-button type="submit" class="md-raised md-primary">Add New Deed</md-button>
+    <md-button ng-click="dc.inputConcat('your partner')" class="md-raised">+ your partner</md-button>
+    <md-button ng-click="dc.inputConcat('your child')" class="md-raised">+ your child</md-button>
+    <md-button ng-click="dc.inputConcat('your friend')" class="md-raised">+ your friend</md-button>
+    <md-button ng-click="dc.addDeed(dc.description)" class="md-raised md-primary">Add New Deed</md-button>
   </form>
 </div>
 <div ng-include="'views/partials/nav.html'"></div>

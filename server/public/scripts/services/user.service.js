@@ -15,6 +15,9 @@ myApp.factory('UserService', function($http, $location){
               userObject.userName = response.data.username;
               userObject.completed = response.data.completed;
               userObject.saved = response.data.saved;
+              userObject.partner = response.data.partner;
+              userObject.children = response.data.children;
+              userObject.friends = response.data.friends;
               console.log('UserService -- getuser -- User Data: ', userObject.userName);
           } else {
               console.log('UserService -- getuser -- failure');

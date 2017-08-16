@@ -1,0 +1,20 @@
+<md-dialog aria-label="List dialog">
+  <md-dialog-content class="inddeed">
+    <md-input-container>
+      <label>Deed:</label>
+      <input ng-model="deed.description">
+    </md-input-container>
+    <md-input-container class="md-block">
+      <label>Note:</label>
+      <textarea ng-model="deed.note" md-maxlength="140" rows="2" md-select-on-focus></textarea>
+    </md-input-container>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="answer('not useful')">
+       Cancel
+      </md-button>
+      <md-button ng-click="answer('useful')">
+        Save
+      </md-button>
+  </md-dialog-actions>
+</md-dialog>

@@ -12,7 +12,10 @@ router.get('/', function(req, res) {
     var userInfo = {
       username : req.user.username,
       saved : req.user.saved,
-      completed : req.user.completed
+      completed : req.user.completed,
+      partner: req.user.partner,
+      children: req.user.children,
+      friends: req.user.friends
     };
     res.send(userInfo);
   } else {
@@ -31,6 +34,40 @@ router.get('/logout', function(req, res) {
   res.sendStatus(200);
 });
 
+router.put('/partner', function(req, res) {
+  console.log('updating partner', req.body);
+  User.findByIdAndUpdate(
+    req.user._id,
+    {$set: {partner: req.body.name}},
+    function(err, response) {
+      console.log('partner put outcome:', err, response);
+    }
+  )
+  res.sendStatus(200);
+})
 
+router.put('/children', function(req, res) {
+  console.log('adding child', req.body);
+  User.findByIdAndUpdate(
+    req.user._id,
+    {$push: {children: req.body}},
+    function(err, response) {
+      console.log('child put outcome:', err, response);
+    }
+  )
+  res.sendStatus(200);
+})
+
+router.put('/friend', function(req, res) {
+  console.log('adding child', req.body);
+  User.findByIdAndUpdate(
+    req.user._id,
+    {$push: {friends: req.body}},
+    function(err, response) {
+      console.log('child put outcome:', err, response);
+    }
+  )
+  res.sendStatus(200);
+})
 
 module.exports = router;

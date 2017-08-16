@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'xeditable']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'xeditable', 'ui.bootstrap']);
 
 /// Routes ///
 myApp.config(function($routeProvider, $locationProvider, $mdThemingProvider) {

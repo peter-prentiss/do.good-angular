@@ -131,6 +131,18 @@ router.put('/removesave', function(req, res) {
   res.sendStatus(200);
 })
 
+router.put('/like', function(req, res) {
+  console.log('put route add like:', req.body);
+  Share.findByIdAndUpdate(
+    req.body._id,
+    { $inc: {"likes": 1}},
+    function(err, response) {
+      console.log('attempt to like:', err, response);
+    }
+  )
+  res.sendStatus(200);
+})
+
 router.get('/share', function(req, res) {
   console.log('getting the shared deeds');
 

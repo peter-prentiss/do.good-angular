@@ -109,6 +109,10 @@ li a:hover {
   background-color: rgb(76, 88, 241)
 }
 
+.md-button.cancel {
+  background-color: rgb(224, 49, 70);
+}
+
 .md-button.complete {
   background-color: rgb(60, 255, 161)
 }
@@ -171,13 +175,13 @@ svg {
   color: #666;
 }
 
-.completed-deeds {
+/*.completed-deeds {
   z-index: -1;
 }
 
 .shared-deeds {
   z-index: -1;
-}
+}*/
 
 .new-deed {
   margin-left: 50px;
@@ -188,9 +192,18 @@ svg {
 }
 
 .user-info {
+  background-color: rgb(181, 170, 195);
   margin-bottom: 100px;
 }
 
 .personal-info {
   margin-left: 30px;
+}
+
+.md-subheader {
+  background-color: rgb(181, 170, 195)
+}
+
+md-dialog-content.inddeed {
+  padding: 30px;
 }
