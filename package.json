@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "grunt babel concat uglify copy",
     "test": "nodemon server/server.js",
     "start": "node server/server.js"
   },

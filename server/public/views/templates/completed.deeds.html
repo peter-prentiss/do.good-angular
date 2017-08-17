@@ -6,9 +6,11 @@
         <div class="md-list-item-text">
           <h4>{{ deed.description }}</h4>
         </div>
-        <md-button class="md-fab md-mini share" aria-label="Share Deed" ng-hide="deed.shared" ng-click="dc.shareDeed(deed)">
-            <md-icon md-svg-src="images/icons/share.svg"></md-icon>
-        </md-button>
+        <div>
+          <md-button class="md-fab md-mini share" aria-label="Share Deed" ng-hide="deed.shared" ng-click="dc.shareDeed(deed)">
+              <md-icon md-svg-src="images/icons/share.svg"></md-icon>
+          </md-button>
+        </div>
         <!-- <i class="material-icons share" ng-hide="deed.shared" ng-click="dc.shareDeed(deed)">share</i> -->
         <md-divider ></md-divider>
       </md-list-item>
