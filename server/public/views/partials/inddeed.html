@@ -1,12 +1,13 @@
-<md-dialog aria-label="List dialog">
+<md-dialog class="indeed-box" aria-label="List dialog">
   <md-dialog-content class="inddeed">
+    <md-subheader class="md-no-sticky">Add Comment:</md-subheader>
     <md-input-container>
       <label>Deed:</label>
       <input ng-model="deed.description" autofocus>
     </md-input-container>
     <md-input-container class="md-block">
       <label>Note:</label>
-      <textarea ng-model="deed.note" md-maxlength="140" rows="2" md-select-on-focus></textarea>
+      <textarea ng-model="deed.note" md-maxlength="140" rows="1" md-select-on-focus></textarea>
     </md-input-container>
   </md-dialog-content>
   <md-dialog-actions>

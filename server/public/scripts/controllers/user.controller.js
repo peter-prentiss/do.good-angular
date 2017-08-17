@@ -1,8 +1,16 @@
-myApp.controller('UserController', function(UserService, $http) {
+myApp.controller('UserController', function(UserService, $http, $mdDialog) {
   console.log('UserController created');
   var vm = this;
   vm.userService = UserService;
   vm.userObject = UserService.userObject;
+
+  vm.avatarStyle = {
+    'width': '200px',
+    'height': '200px',
+    'border-radius': '100px',
+    'background-size': 'cover',
+    'display': 'block'
+  }
 
   vm.partner = vm.userObject;
   vm.persons = {
@@ -43,4 +51,76 @@ myApp.controller('UserController', function(UserService, $http) {
       vm.userService.getuser();
     })
   }
+
+  vm.pending;
+
+  vm.approveDeeds = function(ev) {
+    console.log('approving deeds');
+    $http.get('/deedslist/pending').then(function(response) {
+      console.log('got deeds?', response);
+      vm.pending = response.data;
+
+
+    }).then(function() {
+      $mdDialog.show({
+        controller: PendingController,
+        templateUrl: 'views/partials/pending.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: vm.customFullscreen // Only for -xs, -sm breakpoints.
+      })
+      .then(function(checked) {
+        console.log('passing checked array:', checked);
+        let pendingArray = [];
+        for(let i = 0; i < checked.length; i++) {
+          let pendingDeed = {};
+          pendingDeed.description = checked[i];
+          pendingArray.push(pendingDeed);
+        }
+        $http.post('/deedslist/approve', pendingArray).then(response => {
+          console.log('approved?', response);
+        })
+      }, function() {
+        vm.status = 'You cancelled the dialog.';
+      });
+    })
+  };
+
+  function PendingController($scope, $mdDialog) {
+    $scope.pending = vm.pending;
+    $scope.checked = [];
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.save = function() {
+      console.log('pending array:', $scope.checked);
+      $mdDialog.hide($scope.checked);
+    };
+  }
+
+  vm.client = filestack.init('AX0Uil0hBT3afjt9bxjXXz');
+  // Make sure to include your API key above. If you do not have any API key, you can get one here: https://dev.filestack.com/register/free
+  vm.pickMark = function() {
+    console.log('picking watermark');
+    vm.client.pick({
+      accept: 'image/*',
+      maxFiles:1
+    }).then(result => {
+      console.log('json result', JSON.stringify(result));
+      console.log('url:', result.filesUploaded[0].url);
+      let imgUrl = {
+        img: result.filesUploaded[0].url
+      }
+      $http.put('/user/photo', imgUrl).then(function() {
+        vm.userService.getuser();
+      })
+    });
+  }
+
 });

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var Deed = require('../models/deed.model.js');
+const Pending = require('../models/pending.model.js')
 var path = require('path');
 var User = require('../models/user.model.js')
 var mongoose = require('mongoose');
@@ -18,6 +19,21 @@ router.get('/', function(req, res) {
       res.send(data); //array of objects - each obj a document in the collectin in the db
       //res.send(result.rows) - same as
       console.log('all deeds from db: ', data);
+    }//end if
+  });//end find
+});
+
+router.get('/pending', function(req, res) {
+  console.log('getting pending deeds');
+
+  Pending.find({}, function(err, data) { //find * (same as in mongoose)
+    if(err) {
+      console.log('find error: ', err);
+      res.sendStatus(500);
+    } else {
+      res.send(data); //array of objects - each obj a document in the collectin in the db
+      //res.send(result.rows) - same as
+      console.log('all deeds from pending:', data);
     }//end if
   });//end find
 });
@@ -56,9 +72,49 @@ router.post('/', function(req, res) {
     });
 });
 
+router.post('/approve', function(req, res) {
+  console.log('approving deeds:', req.body);
+
+    Deed.create(req.body, function(err, post) {
+         if(err) {
+           // next() here would continue on and route to routes/index.js
+           throw err;
+         } else {
+          // route a new express request for GET '/'
+          Pending.remove({}, function(err, post) {
+            if(err) {
+              throw err;
+            } else {
+              console.log('deleted collection?');
+              res.sendStatus(201);
+            }
+          })
+         }
+    });
+});
+
+router.post('/pending', function(req, res) {
+  console.log('adding new deed:', req.body);
+    var deedToSave = {
+      description : req.body.description,
+      username: req.user.username
+    };
+
+
+    Pending.create(deedToSave, function(err, post) {
+         if(err) {
+           // next() here would continue on and route to routes/index.js
+           throw err;
+         } else {
+          // route a new express request for GET '/'
+          res.sendStatus(201);
+         }
+    });
+});
+
 router.put('/complete', function(req, res) {
   console.log('put route data', req.body.completedDeed);
-  addPopularity(req.body.completedDeed._id)
+  addPopularity(req.body.completedDeed.description)
   User.findByIdAndUpdate(
     req.user._id,
     {$push: {completed: req.body.completedDeed}},
@@ -97,9 +153,9 @@ router.put('/save', function(req, res) {
   res.sendStatus(200);
 })
 
-function addPopularity(deedId) {
+function addPopularity(description) {
   console.log('adding popularity to deed id:', deedId);
-  Deed.findOneAndUpdate({ _id: deedId }, { $inc: { popularity: 1 }},
+  Deed.findOneAndUpdate({ description: description }, { $inc: { popularity: 1 }},
     function(err, response) {
       console.log('popularity attempt:', err, response);
     }
@@ -154,6 +210,22 @@ router.put('/like', function(req, res) {
   Share.findByIdAndUpdate(
     req.body._id,
     { $inc: {"likes": 1}},
+    function(err, response) {
+      console.log('attempt to like:', err, response);
+    }
+  )
+  res.sendStatus(200);
+})
+
+router.put('/comment', function(req, res) {
+  console.log('put route add comment:', req.body);
+  let comment = {
+    comment: req.body.addedcomment,
+    username: req.user.username
+  }
+  Share.findByIdAndUpdate(
+    req.body._id,
+    { $push: {"comments": comment}},
     function(err, response) {
       console.log('attempt to like:', err, response);
     }

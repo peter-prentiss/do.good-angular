@@ -15,7 +15,9 @@ router.get('/', function(req, res) {
       completed : req.user.completed,
       partner: req.user.partner,
       children: req.user.children,
-      friends: req.user.friends
+      friends: req.user.friends,
+      admin: req.user.admin,
+      img: req.user.img
     };
     res.send(userInfo);
   } else {
@@ -63,6 +65,18 @@ router.put('/friend', function(req, res) {
   User.findByIdAndUpdate(
     req.user._id,
     {$push: {friends: req.body}},
+    function(err, response) {
+      console.log('child put outcome:', err, response);
+    }
+  )
+  res.sendStatus(200);
+})
+
+router.put('/photo', function(req, res) {
+  console.log('uploading imgUrl', req.body.img);
+  User.findByIdAndUpdate(
+    req.user._id,
+    {$set: {img: req.body.img}},
     function(err, response) {
       console.log('child put outcome:', err, response);
     }

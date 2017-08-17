@@ -11,24 +11,8 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
   // vm.savedDeeds = vm.userObject.saved;
   vm.savedDeeds;
 
-  // vm.showPrompt = function(ev, deed, index) {
-  //   // Appending dialog to document.body to cover sidenav in docs app
-  //   var confirm = $mdDialog.prompt()
-  //     .title('Edit your good deed')
-  //     .title('Edit your good deed')
-  //     .placeholder(deed.description)
-  //     .ariaLabel('Dog name')
-  //     .initialValue(deed.description)
-  //     .targetEvent(ev)
-  //     .ok('Save')
-  //     .cancel('Cancel');
-  //
-  //   $mdDialog.show(confirm).then(function(result) {
-  //     console.log('You changed your deed to ' + result + '. at index ' + index);
-  //   }, function() {
-  //     vm.status = 'You didn\'t name your dog.';
-  //   });
-  // };
+  vm.share = false;
+
   vm.deed;
   vm.index;
 
@@ -138,11 +122,14 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
         note: note
       }
       vm.saveDeed(vm.deed);
-      $http.post('/deedslist', vm.deed)
-        .then(response => {
-          console.log('success', response);
-          vm.description = '';
-        })
+      if(vm.share) {
+        $http.post('/deedslist/pending', vm.deed)
+          .then(response => {
+            console.log('success', response);
+          })
+      }
+      vm.description = '';
+      vm.note = '';
     }
   }
 

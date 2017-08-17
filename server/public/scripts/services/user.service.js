@@ -18,6 +18,8 @@ myApp.factory('UserService', function($http, $location){
               userObject.partner = response.data.partner;
               userObject.children = response.data.children;
               userObject.friends = response.data.friends;
+              userObject.admin = response.data.admin;
+              userObject.img = response.data.img;
               console.log('UserService -- getuser -- User Data: ', userObject.userName);
           } else {
               console.log('UserService -- getuser -- failure');

@@ -171,7 +171,7 @@ svg {
 
 .user-photo {
   margin-top: 25px;
-  width: 200px;
+  max-height: 200px;
   color: #666;
 }
 
@@ -193,7 +193,7 @@ svg {
 
 .user-info {
   background-color: rgb(181, 170, 195);
-  margin-bottom: 100px;
+  padding-bottom: 100px;
 }
 
 .personal-info {
@@ -206,4 +206,38 @@ svg {
 
 md-dialog-content.inddeed {
   padding: 30px;
+}
+
+md-dialog-content.comment-container {
+  margin: 30px 0;
+  width: 90%;
+}
+
+md-dialog.comment-box {
+  width: 90%;
+}
+
+md-dialog.pending-dialog {
+  width: 90%;
+  padding: 20px;
+}
+
+md-input-container.comment-input {
+  padding-top: 50px;
+  padding-left: 30px;
+}
+
+md-dialog.indeed-box {
+  width: 90%;
+}
+
+.like-button {
+  align-items:
+}
+
+#user-circle {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  border-radius: 100px;
 }

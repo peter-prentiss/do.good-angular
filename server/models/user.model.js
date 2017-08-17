@@ -21,7 +21,9 @@ const UserSchema = new Schema({
     saved: [DeedSchema],
     partner: String,
     children: Array,
-    friends: Array
+    friends: Array,
+    admin: { type: Boolean, default: false },
+    img: String
 });
 
 // Called before adding a new user to the DB. Encrypts password.

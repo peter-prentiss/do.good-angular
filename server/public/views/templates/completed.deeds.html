@@ -1,9 +1,9 @@
 <div class="completed-deeds">
   <md-content>
     <md-list flex>
-      <md-subheader class="md-no-sticky">Your Completed Deeds:</md-header>
-      <md-list-item class="md-1-line" ng-repeat="deed in dc.completedDeeds">
-        <div class="md-list-item-text" layout="column">
+      <md-subheader class="md-no-sticky">Your Completed Deeds:</md-subheader>
+      <md-list-item class="md-1-line" layout="row" layout-align="space-between center" ng-repeat="deed in dc.completedDeeds">
+        <div class="md-list-item-text">
           <h4>{{ deed.description }}</h4>
         </div>
         <md-button class="md-fab md-mini share" aria-label="Share Deed" ng-hide="deed.shared" ng-click="dc.shareDeed(deed)">

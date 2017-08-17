@@ -1,0 +1,21 @@
+<md-dialog aria-label="List dialog" class="comment-box">
+  <md-dialog-content class="comment-container">
+    <md-input-container class="md-block comment-input">
+      <label>New Comment:</label>
+      <textarea ng-model="newcomment" md-maxlength="140" rows="1" md-select-on-focus></textarea>
+    </md-input-container>
+    <md-dialog-actions>
+      <md-button class="md-raised" ng-click="comment(newcomment)">Add Comment</md-button>
+      <md-button class="md-raised" ng-click="cancel()">Cancel</md-button>
+
+    </md-dialog-actions>
+
+    <md-list>
+      <md-list-item  class="md-2-line" ng-repeat="comment in comments">
+        <h4>{{ comment.username }}^</h4>
+        <p>"{{ comment.comment }}"</p>
+        <md-divider></md-divider>
+      </md-list-item>
+    </md-list>
+  </md-dialog-content>
+</md-dialog>
