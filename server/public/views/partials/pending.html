@@ -4,7 +4,8 @@
     <md-list>
       <md-list-item class="md-2-line" ng-repeat="deed in pending">
         <p>{{ deed.username }}: {{ deed.description }}</p>
-        <md-checkbox checklist-value="deed.description" checklist-model="checked" aria-label="Checkbox" ng-checked="true"></md-checkbox>
+        <md-checkbox checklist-value="deed.description" checklist-model="checked" aria-label="Checkbox"></md-checkbox>
+        <!-- <md-checkbox checklist-value="deed.description" checklist-model="checked" aria-label="Checkbox" ng-checked="true"></md-checkbox> -->
       </md-list-item>
     </md-list>
   </md-dialog-content>
