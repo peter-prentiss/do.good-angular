@@ -6,6 +6,7 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
 
   vm.userService.getuser();
   getDeeds();
+  getShared();
   // getDeedsList();
   vm.completedDeeds = vm.userObject.completed;
   // vm.savedDeeds = vm.userObject.saved;
@@ -15,6 +16,63 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
 
   vm.deed;
   vm.index;
+
+  function getShared() {
+    console.log('getting shared deeds');
+    $http.get('/deedslist/usershared').then(response => {
+      console.log('got users shared:', response);
+      vm.sharedList = response.data;
+    })
+  }
+
+  vm.commentDeed = function(ev, deed) {
+    vm.deed = deed;
+    console.log('comments on deed:', vm.deed,);
+    $mdDialog.show({
+      controller: CommentController,
+      templateUrl: 'views/partials/commentview.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      fullscreen: vm.customFullscreen // Only for -xs, -sm breakpoints.
+    })
+    .then(function(comment) {
+      // console.log('passing comment?', comment, deed);
+      // deed.addedcomment = comment
+      // $http.put('/deedslist/comment', deed).then(response => {
+      //   console.log('edit attempt:', response);
+      //   getShared();
+      // })
+    }, function() {
+      vm.status = 'You cancelled the dialog.';
+    });
+  };
+
+  function CommentController($scope, $mdDialog, $http) {
+    $scope.comments = vm.deed.comments;
+    console.log('deed comments:', $scope.comments);
+    $scope.deed = vm.deed;
+    $scope.index = vm.index;
+    // console.log('able to access variables?', $scope.deed, $scope.index);
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.comment = function(comment) {
+      console.log('added comment', comment, $scope.deed);
+      // $mdDialog.hide(comment);
+      $scope.deed.addedcomment = comment
+      $http.put('/deedslist/comment', $scope.deed).then(response => {
+        console.log('edit attempt:', response);
+        getShared();
+      })
+    };
+  }
+
 
   vm.showDeed = function(ev, deed, index) {
     vm.deed = deed;
@@ -98,7 +156,7 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
         for(let i = 0; i < vm.deedslist.length; i++) {
           let j = randomNum(vm.userObject.children.length);
           let k = randomNum(vm.userObject.friends.length)
-          console.log('random num', j);
+          // console.log('random num', j);
           if(vm.userObject.partner) {
             vm.deedslist[i].description = vm.deedslist[i].description.replace(/your partner/, vm.userObject.partner);
           }
@@ -108,7 +166,7 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
           if(vm.userObject.friends.length > 0) {
             vm.deedslist[i].description = vm.deedslist[i].description.replace(/your friend/, vm.userObject.friends[k].name);
           }
-          console.log('filtered descriptions', vm.deedslist[i].description);
+          // console.log('filtered descriptions', vm.deedslist[i].description);
         }
         console.log('filtered deeds:', vm.deedslist);
       })

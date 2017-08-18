@@ -3,24 +3,31 @@
   <div layout="column" layout-align="start center">
     <img ng-hide="uc.userObject.img" src="images/icons/account_circle.svg" class="user-photo"/>
     <img ng-src="{{ uc.userObject.img }}" class="md-avatar">
-    <h1 id="welcome" class="lead">Welcome, {{uc.userObject.userName}}!</h1>
+    <md-button class="md-raised md-primary" ng-click="uc.pickMark()">Choose Photo</md-button>
+    <h2 id="welcome" class="lead">Welcome, {{uc.userObject.userName}}!</h2>
 
-    <md-button class="md-raised" ng-click="uc.pickMark()">Upload Photo</md-button>
-    <md-button class="md-raised" ng-if="uc.userObject.admin" ng-click="uc.approveDeeds()">Pending Deeds</md-button>
-    <div class="personal-info">
-      <form editable-form name="editableForm" onbeforesave="uc.updatePartner(partner)">
-        <!-- Partner form -->
+  </div>
+
+  <div class="personal-info">
+    <md-header class="bigger-text">User Info:</md-header>
+    <md-divider></md-divider>
+
+    <form editable-form name="editableForm" onbeforesave="uc.updatePartner(partner)">
+      <!-- Partner form -->
+      <div layout="row" layout-align="space-between center">
         <div>
-          <md-subheader>Partner:</md-subheader>
+          <md-subheader class="info-header">Partner:</md-subheader>
           <span ng-show="!editableForm.$visible">
             {{ uc.userObject.partner }}
           </span>
+        </div>
+        <div>
           <input ng-model="partner" ng-show="editableForm.$visible" e-name="partner" onbeforesave="checkName($data)" e-required/>
           <md-button class="md-fab md-mini userinfo" aria-label="Edit" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
             <md-icon md-svg-src="images/icons/create.svg"></md-icon>
           </md-button>
           <span ng-show="editableForm.$visible">
-            <md-button type="submit" class="md-fab md-mini complete" aria-label="Confirm changes" ng-disabled="editableForm.$waiting">
+            <md-button type="submit" class="md-fab md-mini add-deed" aria-label="Confirm changes" ng-disabled="editableForm.$waiting">
               <md-icon md-svg-src="images/icons/check.svg"></md-icon>
             </md-button>
             <md-button class="md-fab md-mini cancel" aria-label="Cancel" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
@@ -28,20 +35,25 @@
             </md-button>
           </span>
         </div>
-      </form>
-      <!-- Children form -->
-      <form editable-form name="editableChildren" onbeforesave="uc.addChild(childToAdd)">
+      </div>
+    </form>
+    <!-- Children form -->
+    <form editable-form name="editableChildren" onbeforesave="uc.addChild(childToAdd)">
+      <div layout="row" layout-align="space-between center">
         <div>
-          <md-subheader>Children:</md-subheader>
+          <md-subheader class="info-header">Children:</md-subheader>
           <p ng-repeat="child in uc.userObject.children" ng-show="!editableChildren.$visible">
             {{ child.name }}
           </p>
           <input ng-show="editableChildren.$visible" ng-model="childToAdd" e-name="children" onbeforesave="checkName($data)" e-required/>
-          <md-button class="md-fab md-mini userinfo" aria-label="Edit" ng-click="editableChildren.$show()" ng-show="!editableChildren.$visible">
-            <md-icon md-svg-src="images/icons/create.svg"></md-icon>
+
+        </div>
+        <div>
+          <md-button class="md-fab md-mini add-deed" aria-label="Edit" ng-click="editableChildren.$show()" ng-show="!editableChildren.$visible">
+            <md-icon md-svg-src="images/icons/add.svg"></md-icon>
           </md-button>
           <span ng-show="editableChildren.$visible">
-            <md-button type="submit" class="md-fab md-mini complete" aria-label="Add child" ng-disabled="editableChildren.$waiting">
+            <md-button type="submit" class="md-fab md-mini add-deed" aria-label="Add child" ng-disabled="editableChildren.$waiting">
               <md-icon md-svg-src="images/icons/add.svg"></md-icon>
             </md-button>
             <md-button class="md-fab md-mini cancel" aria-label="Cancel" ng-disabled="editableChildren.$waiting" ng-click="editableChildren.$cancel()">
@@ -49,35 +61,42 @@
             </md-button>
           </span>
         </div>
-      </form>
-      <!-- Friends form -->
-      <form editable-form name="editableFriends" onbeforesave="uc.addFriend(friendToAdd)">
+      </div>
+    </form>
+    <!-- Friends form -->
+    <form editable-form name="editableFriends" onbeforesave="uc.addFriend(friendToAdd)">
+      <md-subheader class="info-header">Friends:</md-subheader>
+
+      <div layout="row" layout-align="space-between center">
         <div>
-          <md-subheader>Friends:</md-subheader>
-          <p ng-repeat="child in uc.userObject.friends" ng-show="!editableChildren.$visible">
-            {{ child.name }}
+          <p ng-repeat="friend in uc.userObject.friends" ng-show="!editableFriends.$visible">
+            {{ friend.name }}
           </p>
+        </div>
+        <div layout="row" layout-align="space-between center">
           <input ng-show="editableFriends.$visible" ng-model="friendToAdd" e-name="friends" onbeforesave="checkName($data)" e-required/>
-          <md-button class="md-fab md-mini userinfo" aria-label="Edit" ng-click="editableFriends.$show()" ng-show="!editableFriends.$visible">
-            <md-icon md-svg-src="images/icons/create.svg"></md-icon>
+          <md-button class="md-fab md-mini add-deed" aria-label="Edit" ng-click="editableFriends.$show()" ng-show="!editableFriends.$visible">
+            <md-icon md-svg-src="images/icons/add.svg"></md-icon>
           </md-button>
-          <span ng-show="editableFriends.$visible">
-            <md-button type="submit" class="md-fab md-mini complete" aria-label="Add child" ng-disabled="editableFriends.$waiting">
+          <div layout="row" layout-align="end center" ng-show="editableFriends.$visible">
+            <md-button type="submit" class="md-fab md-mini add-deed" aria-label="Add child" ng-disabled="editableFriends.$waiting">
               <md-icon md-svg-src="images/icons/add.svg"></md-icon>
             </md-button>
             <md-button class="md-fab md-mini cancel" aria-label="Cancel" ng-disabled="editableFriends.$waiting" ng-click="editableFriends.$cancel()">
               <md-icon md-svg-src="images/icons/clear.svg"></md-icon>
             </md-button>
-          </span>
+          </div>
         </div>
-      </form>
-    </div>
 
-    <md-button class="md-raised md-warn" ng-click="uc.userService.logout()">Log Out</md-button>
-
-
+      </div>
+    </form>
+  </div>
+  <div layout="row" layout-align="space-around center">
+    <md-button class="md-raised" ng-if="uc.userObject.admin" ng-click="uc.approveDeeds()">Pending Deeds</md-button>
+    <md-button class="md-raised logout" ng-click="uc.userService.logout()">Log Out</md-button>
 
   </div>
+
 </div>
 
 <div ng-include="'views/partials/nav.html'"></div>

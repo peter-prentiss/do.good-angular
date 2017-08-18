@@ -8,14 +8,17 @@
         <label for="description">Description:</label>
         <input id="description" type="text" ng-model="dc.description" autofocus/>
       </md-input-container>
-      <p>Use for sharing ideas with others so they will be personalized:</p>
-      <md-button ng-click="dc.inputConcat('your partner')" class="md-raised">+ your partner</md-button>
-      <md-button ng-click="dc.inputConcat('your child')" class="md-raised">+ your child</md-button>
-      <md-button ng-click="dc.inputConcat('your friend')" class="md-raised">+ your friend</md-button>
+      <div layout="column" layout-align="space-between center">
+        <p>Adding the below will be replaced by people in your user info:</p>
+        <md-button ng-click="dc.inputConcat('your partner')" class="md-raised">+ your partner</md-button>
+        <md-button ng-click="dc.inputConcat('your child')" class="md-raised">+ your child</md-button>
+        <md-button ng-click="dc.inputConcat('your friend')" class="md-raised">+ your friend</md-button>
+
+      </div>
 
       <md-input-container class="md-block">
         <label>Note (for your eyes only):</label>
-        <textarea ng-model="dc.note" md-maxlength="140" rows="1" md-select-on-focus></textarea>
+        <textarea ng-model="dc.note" md-maxlength="140" rows="3" md-select-on-focus></textarea>
       </md-input-container>
     </div>
     <!-- <input class="btn btn-default" type="submit" name="submit" value="Submit New Deed" /> -->

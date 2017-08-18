@@ -1,18 +1,49 @@
+<div class="shared-deeds">
+  <md-content>
+    <md-list flex>
+      <md-subheader class="md-no-sticky">Your Shared Deeds:</md-subheader>
+      <md-list-item class="md-2-line shared-item" ng-repeat="deed in dc.sharedList">
+          <div class="md-list-item-text" layout="column">
+            <!-- <p>{{ deed.username }} did a good deed:</p> -->
+            <h3 class="list-heading">{{ deed.description }}</h3>
+          </div>
+          <div layout="row" layout-align="end center">
+            <div class="md-list-item-text" layout="column" layout-align="center center">
+              <md-button class="md-fab md-mini md-primary" aria-label="Like">
+                <md-icon md-svg-src="images/icons/thumb_up.svg"></md-icon>
+              </md-button>
+              <p>{{ deed.likes }}</p>
+            </div>
+            <div class="md-list-item-text" layout="column" layout-align="center center">
+              <md-button class="md-fab md-mini comment-bubble" aria-label="Comment" ng-click="dc.commentDeed($event, deed)">
+                <md-icon md-svg-src="images/icons/question_answer.svg"></md-icon>
+              </md-button>
+              <p>
+                {{ deed.comments.length }}
+              </p>
+            </div>
+          </div>
+
+        <md-divider ></md-divider>
+      </md-list-item>
+    </md-list>
+  </md-content>
+
+
 <div class="completed-deeds">
   <md-content>
     <md-list flex>
       <md-subheader class="md-no-sticky">Your Completed Deeds:</md-subheader>
-      <md-list-item class="md-1-line" layout="row" layout-align="space-between center" ng-repeat="deed in dc.completedDeeds">
+      <md-list-item class="md-2-line" layout="row" layout-align="space-between center" ng-repeat="deed in dc.completedDeeds">
         <div class="md-list-item-text">
-          <h4>{{ deed.description }}</h4>
+          <h3 class="list-heading">{{ deed.description }}</h3>
         </div>
         <div>
           <md-button class="md-fab md-mini share" aria-label="Share Deed" ng-hide="deed.shared" ng-click="dc.shareDeed(deed)">
               <md-icon md-svg-src="images/icons/share.svg"></md-icon>
           </md-button>
         </div>
-        <!-- <i class="material-icons share" ng-hide="deed.shared" ng-click="dc.shareDeed(deed)">share</i> -->
-        <md-divider ></md-divider>
+        <md-divider></md-divider>
       </md-list-item>
     </md-list>
   </md-content>

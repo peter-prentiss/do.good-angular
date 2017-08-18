@@ -102,11 +102,11 @@ li a:hover {
 }
 
 .md-button.add-deed {
-  background-color: rgb(50, 201, 174)
+  background-color: rgb(4, 214, 189);
 }
 
 .md-button.shared {
-  background-color: rgb(76, 88, 241)
+  background-color: rgb(76, 88, 241);
 }
 
 .md-button.cancel {
@@ -114,15 +114,19 @@ li a:hover {
 }
 
 .md-button.complete {
-  background-color: rgb(60, 255, 161)
+  background-color: rgb(104, 221, 49);
 }
 
 .md-button.deedlist {
-  background-color: rgb(255, 105, 217)
+  background-color: rgb(255, 105, 217);
 }
 
 .md-button.userinfo {
-  background-color: rgb(134, 46, 223)
+  background-color: rgb(134, 46, 223);
+}
+
+.md-button.comment-bubble {
+  background-color: rgb(80, 129, 255);
 }
 
 .deedslist {
@@ -138,7 +142,7 @@ i {
 }
 
 .md-button.save {
-  background-color: rgb(199, 166, 51);
+  background-color: rgb(255, 250, 0);
   text-shadow: 1px 1px 1px black;
 }
 
@@ -171,7 +175,7 @@ svg {
 
 .user-photo {
   margin-top: 25px;
-  max-height: 200px;
+  width: 200px;
   color: #666;
 }
 
@@ -184,11 +188,12 @@ svg {
 }*/
 
 .new-deed {
-  margin-left: 50px;
+  margin: 20px;
+  padding-bottom: 60px;
 }
 
 .md-button.share {
-  background-color: #555;
+  background-color: rgb(254, 176, 60);
 }
 
 .user-info {
@@ -201,7 +206,12 @@ svg {
 }
 
 .md-subheader {
-  background-color: rgb(181, 170, 195)
+  background-color: rgb(181, 170, 195);
+}
+
+.md-button.logout {
+  background-color: rgb(45, 45, 45);
+  color: white;
 }
 
 md-dialog-content.inddeed {
@@ -240,4 +250,25 @@ md-dialog.indeed-box {
   height: 200px;
   background-size: cover;
   border-radius: 100px;
+}
+
+md-input-container {
+  width: 100%;
+}
+
+md-header.bigger-text {
+  font-size: 1.4em;
+}
+
+.md-subheader.info-header {
+  font-size: 1.25em;
+  margin-left: -20px;
+}
+
+.info-header .md-subheader-inner {
+  padding-bottom: 5px;
+}
+
+.comment-head {
+  margin-left: 20px;
 }

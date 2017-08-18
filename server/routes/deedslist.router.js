@@ -9,52 +9,52 @@ var mongoose = require('mongoose');
 const Share = require('../models/shared.model.js')
 
 router.get('/', function(req, res) {
-  console.log('getting the deeds');
+  // console.log('getting the deeds');
 
   Deed.find({}, function(err, data) { //find * (same as in mongoose)
     if(err) {
-      console.log('find error: ', err);
+      // console.log('find error: ', err);
       res.sendStatus(500);
     } else {
       res.send(data); //array of objects - each obj a document in the collectin in the db
       //res.send(result.rows) - same as
-      console.log('all deeds from db: ', data);
+      // console.log('all deeds from db: ', data);
     }//end if
   });//end find
 });
 
 router.get('/pending', function(req, res) {
-  console.log('getting pending deeds');
+  // console.log('getting pending deeds');
 
   Pending.find({}, function(err, data) { //find * (same as in mongoose)
     if(err) {
-      console.log('find error: ', err);
+      // console.log('find error: ', err);
       res.sendStatus(500);
     } else {
       res.send(data); //array of objects - each obj a document in the collectin in the db
       //res.send(result.rows) - same as
-      console.log('all deeds from pending:', data);
+      // console.log('all deeds from pending:', data);
     }//end if
   });//end find
 });
 
 router.get('/saved', function(req, res) {
-  console.log('getting saved deeds');
+  // console.log('getting saved deeds');
   let userId = req.user._id
-  console.log('user id:', req.user._id)
+  // console.log('user id:', req.user._id)
   User.findById(req.user._id, (err, user) => {
-    console.log('user saved deeds', user.saved);
+    // console.log('user saved deeds', user.saved);
     if(err) {
       throw err;
     } else {
-      console.log('user saved deeds', user.saved);
+      // console.log('user saved deeds', user.saved);
       res.send({saved: user.saved, completed: user.completed})
     }
   })
 })
 
 router.post('/', function(req, res) {
-  console.log('adding new deed:', req.body);
+  // console.log('adding new deed:', req.body);
     var deedToSave = {
       description : req.body.description,
       note: req.body.note
@@ -73,7 +73,7 @@ router.post('/', function(req, res) {
 });
 
 router.post('/approve', function(req, res) {
-  console.log('approving deeds:', req.body);
+  // console.log('approving deeds:', req.body);
 
     Deed.create(req.body, function(err, post) {
          if(err) {
@@ -85,7 +85,7 @@ router.post('/approve', function(req, res) {
             if(err) {
               throw err;
             } else {
-              console.log('deleted collection?');
+              // console.log('deleted collection?');
               res.sendStatus(201);
             }
           })
@@ -94,7 +94,7 @@ router.post('/approve', function(req, res) {
 });
 
 router.post('/pending', function(req, res) {
-  console.log('adding new deed:', req.body);
+  // console.log('adding new deed:', req.body);
     var deedToSave = {
       description : req.body.description,
       username: req.user.username
@@ -113,20 +113,20 @@ router.post('/pending', function(req, res) {
 });
 
 router.put('/complete', function(req, res) {
-  console.log('put route data', req.body.completedDeed);
+  // console.log('put route data', req.body.completedDeed);
   addPopularity(req.body.completedDeed.description)
   User.findByIdAndUpdate(
     req.user._id,
     {$push: {completed: req.body.completedDeed}},
     function(err, response) {
-      console.log('put outcome:', err, response);
+      // console.log('put outcome:', err, response);
     }
   )
   res.sendStatus(200);
 })
 
 router.put('/edit', function(req, res) {
-  console.log('edit deed data', req.body);
+  // console.log('edit deed data', req.body);
   User.findOneAndUpdate(
     { "_id": req.user._id, "saved._id": req.body._id },
     {$set: {
@@ -135,35 +135,35 @@ router.put('/edit', function(req, res) {
       }
     },
     function(err, response) {
-      console.log('attempt to edit deed:', err, response);
+      // console.log('attempt to edit deed:', err, response);
     }
   )
   res.sendStatus(200)
 })
 
 router.put('/save', function(req, res) {
-  console.log('put route data', req.body.savedDeed);
+  // console.log('put route data', req.body.savedDeed);
   User.findByIdAndUpdate(
     req.user._id,
     {$push: {saved: req.body.savedDeed}},
     function(err, response) {
-      console.log('adding to saved attempt:', err, response);
+      // console.log('adding to saved attempt:', err, response);
     }
   )
   res.sendStatus(200);
 })
 
 function addPopularity(description) {
-  console.log('adding popularity to deed id:', deedId);
+  // console.log('adding popularity to deed id:', deedId);
   Deed.findOneAndUpdate({ description: description }, { $inc: { popularity: 1 }},
     function(err, response) {
-      console.log('popularity attempt:', err, response);
+      // console.log('popularity attempt:', err, response);
     }
   )
 }
 
 router.post('/share', function(req, res) {
-  console.log('sharing deed:', req.body);
+  // console.log('sharing deed:', req.body);
   var deedToShare = {
     description : req.body.sharedDeed.description,
     username: req.body.userName
@@ -182,43 +182,43 @@ router.post('/share', function(req, res) {
 })
 
 router.put('/markshared', function(req, res) {
-  console.log('put route data markshared', req.body.sharedDeed);
+  // console.log('put route data markshared', req.body.sharedDeed);
   User.findOneAndUpdate(
     { "_id": req.user._id, "completed._id": req.body.sharedDeed._id },
     {$set: {"completed.$.shared": true}},
     function(err, response) {
-      console.log('attempt to mark shared:', err, response);
+      // console.log('attempt to mark shared:', err, response);
     }
   )
   res.sendStatus(200);
 })
 
 router.put('/removesave', function(req, res) {
-  console.log('put route remove saved:', req.body.completedDeed);
+  // console.log('put route remove saved:', req.body.completedDeed);
   User.findByIdAndUpdate(
     req.user._id,
     { $pull: {"saved": {_id: mongoose.Types.ObjectId(req.body.completedDeed._id)}}},
     function(err, response) {
-      console.log('attempt to remove saved:', err, response);
+      // console.log('attempt to remove saved:', err, response);
     }
   )
   res.sendStatus(200);
 })
 
 router.put('/like', function(req, res) {
-  console.log('put route add like:', req.body);
+  // console.log('put route add like:', req.body);
   Share.findByIdAndUpdate(
     req.body._id,
     { $inc: {"likes": 1}},
     function(err, response) {
-      console.log('attempt to like:', err, response);
+      // console.log('attempt to like:', err, response);
     }
   )
   res.sendStatus(200);
 })
 
 router.put('/comment', function(req, res) {
-  console.log('put route add comment:', req.body);
+  // console.log('put route add comment:', req.body);
   let comment = {
     comment: req.body.addedcomment,
     username: req.user.username
@@ -227,14 +227,14 @@ router.put('/comment', function(req, res) {
     req.body._id,
     { $push: {"comments": comment}},
     function(err, response) {
-      console.log('attempt to like:', err, response);
+      // console.log('attempt to like:', err, response);
     }
   )
   res.sendStatus(200);
 })
 
 router.get('/share', function(req, res) {
-  console.log('getting the shared deeds');
+  // console.log('getting the shared deeds');
 
   Share.find({}, function(err, data) { //find * (same as in mongoose)
     if(err) {
@@ -243,7 +243,23 @@ router.get('/share', function(req, res) {
     } else {
       res.send(data); //array of objects - each obj a document in the collectin in the db
       //res.send(result.rows) - same as
-      console.log('all deeds from db: ', data);
+      // console.log('all deeds from db: ', data);
+    }//end if
+  });//end find
+
+})
+
+router.get('/usershared', function(req, res) {
+  console.log('getting users shared deeds');
+
+  Share.find({username: req.user.username}, function(err, data) { //find * (same as in mongoose)
+    if(err) {
+      console.log('find error: ', err);
+      res.sendStatus(500);
+    } else {
+      res.send(data); //array of objects - each obj a document in the collectin in the db
+      //res.send(result.rows) - same as
+      console.log('all users shared from db: ', data);
     }//end if
   });//end find
 

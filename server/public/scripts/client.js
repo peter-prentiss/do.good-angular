@@ -77,7 +77,8 @@ myApp.config(function($routeProvider, $locationProvider, $mdThemingProvider) {
 
     $mdThemingProvider.theme('default')
       .primaryPalette('deep-purple')
-      .warnPalette('red')
+      .accentPalette('yellow')
+      .warnPalette('red');
 });
 
 myApp.run(function(editableOptions) {
