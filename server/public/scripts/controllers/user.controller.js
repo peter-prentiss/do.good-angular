@@ -1,8 +1,17 @@
-myApp.controller('UserController', function(UserService, $http, $mdDialog) {
+myApp.controller('UserController', function(UserService, $http, $mdDialog, $location) {
   console.log('UserController created');
   var vm = this;
   vm.userService = UserService;
   vm.userObject = UserService.userObject;
+
+  vm.logout = function() {
+    UserService.logout().then(function(usr) {
+      vm.userObject = usr;
+      UserService.userObject = usr;
+      console.log('logged out on service. user object:', vm.userObject, UserService.userObject);
+      $location.path("/welcome");
+    });
+  }
 
   vm.avatarStyle = {
     'width': '200px',
@@ -106,7 +115,7 @@ myApp.controller('UserController', function(UserService, $http, $mdDialog) {
 
   vm.client = filestack.init('AX0Uil0hBT3afjt9bxjXXz');
   // Make sure to include your API key above. If you do not have any API key, you can get one here: https://dev.filestack.com/register/free
-  vm.pickMark = function() {
+  vm.pickPic = function() {
     console.log('picking watermark');
     vm.client.pick({
       accept: 'image/*',

@@ -211,6 +211,6 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
 
   vm.inputConcat = (string) => {
     console.log('concatenating string', string);
-    vm.description = vm.description.concat(' ', string);
+    vm.description = vm.description.concat(' ', string, ' ');
   }
 });

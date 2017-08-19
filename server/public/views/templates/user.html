@@ -1,9 +1,9 @@
 <div ng-include="'views/partials/header.html'"></div>
 <div class="user-info">
   <div layout="column" layout-align="start center">
-    <img ng-hide="uc.userObject.img" src="images/icons/account_circle.svg" class="user-photo"/>
-    <img ng-src="{{ uc.userObject.img }}" class="md-avatar">
-    <md-button class="md-raised md-primary" ng-click="uc.pickMark()">Choose Photo</md-button>
+    <img ng-if="!uc.userObject.img" src="images/icons/account_circle.svg" class="user-photo"/>
+    <img ng-if="uc.userObject.img" ng-src="{{ uc.userObject.img }}" class="md-avatar">
+    <md-button class="md-raised md-primary" ng-click="uc.pickPic()">Choose Photo</md-button>
     <h2 id="welcome" class="lead">Welcome, {{uc.userObject.userName}}!</h2>
 
   </div>
@@ -93,7 +93,7 @@
   </div>
   <div layout="row" layout-align="space-around center">
     <md-button class="md-raised" ng-if="uc.userObject.admin" ng-click="uc.approveDeeds()">Pending Deeds</md-button>
-    <md-button class="md-raised logout" ng-click="uc.userService.logout()">Log Out</md-button>
+    <md-button class="md-raised logout" ng-click="uc.logout()">Log Out</md-button>
 
   </div>
 
