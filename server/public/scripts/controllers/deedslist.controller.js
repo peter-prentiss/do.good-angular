@@ -225,6 +225,12 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
     getDeeds();
   }
 
+  vm.removeSaved = deed => {
+    console.log('removing saved', deed);
+    UserService.removeSaved(deed);
+    getDeeds();
+  }
+
   vm.inputConcat = (string) => {
     console.log('concatenating string', string);
     vm.description = vm.description.concat(' ', string, ' ');

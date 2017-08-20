@@ -196,6 +196,10 @@ svg {
   background-color: rgb(254, 176, 60);
 }
 
+.md-button.remove {
+  background-color: rgb(82, 82, 82);
+}
+
 .user-info {
   background-color: rgb(196, 150, 255);
   padding-bottom: 100px;

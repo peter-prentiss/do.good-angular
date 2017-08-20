@@ -6,6 +6,10 @@
         <div class="md-list-item-text" layout="column">
           <p class="list-heading">{{ deed.description }}</p>
         </div>
+        <md-button class="md-fab md-mini remove" aria-label="remove" ng-click="dc.removeSaved(deed)">
+          <md-icon md-svg-src="images/icons/clear.svg"></md-icon>
+        </md-button>
+
         <md-button class="md-fab md-mini complete" aria-label="Complete Deed" ng-click="dc.completeDeed(deed)">
             <md-icon md-svg-src="images/icons/check.svg"></md-icon>
         </md-button>

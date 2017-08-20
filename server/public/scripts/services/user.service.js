@@ -75,6 +75,18 @@ myApp.factory('UserService', function($http, $location){
       })
     },
 
+    removeSaved: function(deed) {
+      console.log('removing saved in service', deed);
+      userObjectServ.completedDeed = {
+        description: deed.description,
+        _id: deed._id
+      }
+      // put in if
+      $http.put('deedslist/removesave', userObjectServ).then(function(response) {
+        console.log('removed from save');
+      })
+    },
+
     shareDeed: function(deed) {
       console.log('sharing deed:', deed);
       userObjectServ.sharedDeed = {
