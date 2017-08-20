@@ -179,13 +179,13 @@ svg {
   color: #666;
 }
 
-/*.completed-deeds {
-  z-index: -1;
+.completed-deeds {
+  padding-bottom: 60px;
 }
 
 .shared-deeds {
-  z-index: -1;
-}*/
+  padding-bottom: 60px;
+}
 
 .new-deed {
   margin: 20px;

@@ -119,6 +119,22 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
     $http.get('/deedslist/saved')
       .then(response => {
         vm.savedDeeds = response.data.saved;
+        for(let i = 0; i < vm.savedDeeds.length; i++) {
+          let j = randomNum(vm.userObject.children.length);
+          let k = randomNum(vm.userObject.friends.length)
+          // console.log('random num', j);
+          if(vm.userObject.partner) {
+            vm.savedDeeds[i].description = vm.savedDeeds[i].description.replace(/your partner/, vm.userObject.partner);
+          }
+          if(vm.userObject.children.length > 0) {
+            vm.savedDeeds[i].description = vm.savedDeeds[i].description.replace(/your child/, vm.userObject.children[j].name);
+          }
+          if(vm.userObject.friends.length > 0) {
+            vm.savedDeeds[i].description = vm.savedDeeds[i].description.replace(/your friend/, vm.userObject.friends[k].name);
+          }
+          // console.log('filtered descriptions', vm.deedslist[i].description);
+        }
+
         vm.completedDeeds = response.data.completed;
         console.log('saved deeds:', vm.savedDeeds, vm.completedDeeds);
         // getDeedsList();
