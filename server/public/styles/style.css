@@ -197,7 +197,7 @@ svg {
 }
 
 .user-info {
-  background-color: rgb(181, 170, 195);
+  background-color: rgb(196, 150, 255);
   padding-bottom: 100px;
 }
 
@@ -206,7 +206,7 @@ svg {
 }
 
 .md-subheader {
-  background-color: rgb(181, 170, 195);
+  background-color: rgb(196, 150, 255);
 }
 
 .md-button.logout {
