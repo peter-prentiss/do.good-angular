@@ -2,7 +2,7 @@
 <div class="login">
   <h1 class="lead">Login</h1>
     <h4 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h4>
-    <form ng-submit="lc.login()">
+    <form ng-submit="lc.login()" class="login-form">
       <div>
         <md-input-container>
           <label for="username">Username:</label>

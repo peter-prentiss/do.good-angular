@@ -272,3 +272,7 @@ md-header.bigger-text {
 .comment-head {
   margin-left: 20px;
 }
+
+.login-form {
+  padding-right: 50px;
+}
