@@ -34,7 +34,7 @@
   <md-content>
     <md-list flex>
       <md-subheader class="md-no-sticky">Your Completed Deeds:</md-subheader>
-      <md-list-item class="md-2-line" layout="row" layout-align="space-between center" ng-repeat="deed in dc.completedDeeds">
+      <md-list-item class="md-2-line" layout="row" layout-align="space-between center" ng-repeat="deed in dc.completedDeeds" ng-if="!deed.shared">
         <div class="md-list-item-text">
           <h3 class="list-heading">{{ deed.description }}</h3>
         </div>
