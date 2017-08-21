@@ -12,6 +12,7 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
   // vm.savedDeeds = vm.userObject.saved;
   vm.savedDeeds;
 
+  vm.save = true;
   vm.share = false;
 
   vm.deed;
@@ -195,7 +196,9 @@ myApp.controller('DeedsListController', function(UserService, $http, $mdDialog) 
         description: description,
         note: note
       }
-      vm.saveDeed(vm.deed);
+      if(vm.save) {
+        vm.saveDeed(vm.deed);
+      }
       if(vm.share) {
         $http.post('/deedslist/pending', vm.deed)
           .then(response => {

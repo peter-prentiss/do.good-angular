@@ -22,7 +22,10 @@
       </md-input-container>
     </div>
     <!-- <input class="btn btn-default" type="submit" name="submit" value="Submit New Deed" /> -->
-    <md-checkbox ng-model="dc.share" aria-label="Checkbox 1">
+    <md-checkbox ng-model="dc.save" aria-label="Checkbox Save">
+      Save to your deeds
+    </md-checkbox>
+    <md-checkbox ng-model="dc.share" aria-label="Checkbox Share">
       Share idea with others
     </md-checkbox>
     <md-button ng-click="dc.addDeed(dc.description, dc.note)" class="md-raised md-primary">Add New Deed</md-button>
