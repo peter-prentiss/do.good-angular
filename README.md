@@ -7,11 +7,11 @@ https://do-good-everyday.herokuapp.com
 ## Built With
 
 MEAN Stack:
-..*
-1. MongoDB
-2. Express.js
-3. AngularJS
-4. Node.js
+
+* MongoDB
+* Express.js
+* AngularJS
+* Node.js
 
 FileStack for image uploads
 
@@ -26,13 +26,13 @@ FileStack for image uploads
 Download zip, unpack, open in terminal and run npm install
 
 ### Completed Features
-..*
-1. Personalized randomly generated good deeds.
-2. Profile setup with partner, family, friends and a photo.
-3. Users can save their favorite deeds.
-4. Users can add their own ideas for good deeds.
-5. Users can view and share their completed deeds.
-6. Users can like and comment on each other's shared deeds.
+
+* Personalized randomly generated good deeds.
+* Profile setup with partner, family, friends and a photo.
+* Users can save their favorite deeds.
+* Users can add their own ideas for good deeds.
+* Users can view and share their completed deeds.
+* Users can like and comment on each other's shared deeds.
 
 ### Next Steps
 
