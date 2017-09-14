@@ -2,7 +2,7 @@
 <div class="login">
   <h1 class="lead">Sign Up</h1>
   <h4 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h4>
-  <form ng-submit="lc.registerUser()" class="login-form">
+  <form ng-submit="lc.registerUser()">
     <div>
       <md-input-container>
         <label for="username">Username:</label>
@@ -21,7 +21,6 @@
         <input type="password" ng-model="lc.user.confirmpwd" />
       </md-input-container>
     </div>
-    <!-- <md-button type="submit"></md-button> -->
     <md-button ng-click="lc.registerUser()" class="md-raised md-primary">Register</md-button>
     <a href="#welcome">Cancel</a>
   </form>

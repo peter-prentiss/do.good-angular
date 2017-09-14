@@ -1,57 +1,43 @@
-# Name of Project
+# do.good
 
-One Paragraph of project description goes here. Link to the live version of the app if it's hosted on Heroku.
+do.good everyday is a simple, social app that provides users with a list of small, personalized good deeds to do, allows them to create and share new ones, and allows them to share, comment on and encourage each other's completed deeds.
+
+https://do-good-everyday.herokuapp.com
 
 ## Built With
 
-List technologies and frameworks here
+MEAN Stack:
+..*
+1. MongoDB
+2. Express.js
+3. AngularJS
+4. Node.js
+
+FileStack for image uploads
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
-Link to software that is required to install the app (e.g. node).
-
 - [Node.js](https://nodejs.org/en/)
-- List other prerequisites here
-
 
 ### Installing
 
-Steps to get the development environment running.
-
-## Screen Shot
-
-Include one or two screen shots of your project here (optional). Remove if unused.
-
-## Documentation
-
-Link to a read-only version of your scope document or other relevant documentation here (optional). Remove if unused.
+Download zip, unpack, open in terminal and run npm install
 
 ### Completed Features
-
-High level list of items completed.
-
-- [x] Feature a
-- [x] Feature b
+..*
+1. Personalized randomly generated good deeds.
+2. Profile setup with partner, family, friends and a photo.
+3. Users can save their favorite deeds.
+4. Users can add their own ideas for good deeds.
+5. Users can view and share their completed deeds.
+6. Users can like and comment on each other's shared deeds.
 
 ### Next Steps
 
-Features that you would like to add at some point in the future.
-
-- [ ] Feature c
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+Integrating with Facebook API to allow Facebook login and allow people to share good deeds through their immediate social network through Facebook.
 
 ## Authors
 
-* Name of author(s)
-
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
+Peter Prentiss
