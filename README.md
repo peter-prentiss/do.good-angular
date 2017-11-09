@@ -1,4 +1,4 @@
-# do.good
+# do.good everyday
 
 do.good everyday is a simple, social app that provides users with a list of small, personalized good deeds to do, allows them to create and share new ones, and allows them to share, comment on and encourage each other's completed deeds.
 
